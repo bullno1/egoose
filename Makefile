@@ -36,7 +36,7 @@ $(error "Rebar not available on this system")
 endif
 
 .PHONY: all compile doc clean test dialyzer typer shell distclean pdf \
-  update-deps clean-common-test-data rebuild compile-port clean-port
+  update-deps clean-common-test-data rebuild compile-port clean-port goose
 
 all: deps compile
 
@@ -55,7 +55,7 @@ update-deps:
 compile:
 	$(REBAR) skip_deps=true compile
 
-compile-port:
+compile-port: goose
 	pushd deps/goose && \
 	mvn package && \
 	mvn dependency:copy-dependencies && \
@@ -63,6 +63,11 @@ compile-port:
 	cp deps/goose/target/*.jar port/libs/
 	cp deps/goose/target/dependency/*.jar port/libs/
 	$(MAKE) -C port
+
+goose:
+	[ -f deps/goose/pom.f ] \
+		|| (mkdir -p deps/goose \
+		    && git clone git://github.com/GravityLabs/goose.git deps/goose)
 
 clean-port:
 	pushd deps/goose && \
