@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="build">
+	<import file="base.xml" />
+    <target name="package">
+        <jar destfile="../priv/GoosePort.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="com.massmify.GoosePort"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ commons-codec-1.4.jar commons-io-2.0.1.jar commons-lang-2.6.jar commons-logging-1.1.1.jar goose-2.1.22-sources.jar goose-2.1.22.jar httpclient-4.1.2.jar httpcore-4.1.2.jar OtpErlang-1.5.8.jar jsoup-1.5.2.jar junit-4.8.1.jar log4j-1.2.16.jar scala-compiler-2.9.0-1.jar scala-library-2.9.0-1.jar slf4j-api-1.6.1.jar slf4j-log4j12-1.6.1.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="bin"/>
+            <zipfileset dir="libs" includes="commons-codec-1.4.jar"/>
+            <zipfileset dir="libs" includes="commons-io-2.0.1.jar"/>
+            <zipfileset dir="libs" includes="commons-lang-2.6.jar"/>
+            <zipfileset dir="libs" includes="commons-logging-1.1.1.jar"/>
+            <zipfileset dir="libs" includes="goose-2.1.22-sources.jar"/>
+            <zipfileset dir="libs" includes="goose-2.1.22.jar"/>
+            <zipfileset dir="libs" includes="httpclient-4.1.2.jar"/>
+            <zipfileset dir="libs" includes="httpcore-4.1.2.jar"/>
+            <zipfileset dir="libs" includes="OtpErlang-1.5.8.jar"/>
+            <zipfileset dir="libs" includes="jsoup-1.5.2.jar"/>
+            <zipfileset dir="libs" includes="junit-4.8.1.jar"/>
+            <zipfileset dir="libs" includes="log4j-1.2.16.jar"/>
+            <zipfileset dir="libs" includes="scala-compiler-2.9.0-1.jar"/>
+            <zipfileset dir="libs" includes="scala-library-2.9.0-1.jar"/>
+            <zipfileset dir="libs" includes="slf4j-api-1.6.1.jar"/>
+            <zipfileset dir="libs" includes="slf4j-log4j12-1.6.1.jar"/>
+        </jar>
+    </target>
+	<target name="build" depends="base.build,package">
+	</target>
+	<target name="clean" depends="base.clean">
+		<delete file="../priv/GoosePort.jar"/>
+		<delete file="libs/commons-codec-1.4.jar"/>
+		<delete file="libs/commons-io-2.0.1.jar"/>
+		<delete file="libs/commons-lang-2.6.jar"/>
+		<delete file="libs/commons-logging-1.1.1.jar"/>
+		<delete file="libs/goose-2.1.22-sources.jar"/>
+		<delete file="libs/goose-2.1.22.jar"/>
+		<delete file="libs/httpclient-4.1.2.jar"/>
+		<delete file="libs/httpcore-4.1.2.jar"/>
+		<delete file="libs/jsoup-1.5.2.jar"/>
+		<delete file="libs/junit-4.8.1.jar"/>
+		<delete file="libs/log4j-1.2.16.jar"/>
+		<delete file="libs/scala-compiler-2.9.0-1.jar"/>
+		<delete file="libs/scala-library-2.9.0-1.jar"/>
+		<delete file="libs/slf4j-api-1.6.1.jar"/>
+		<delete file="libs/slf4j-log4j12-1.6.1.jar"/>
+	</target>
+</project>

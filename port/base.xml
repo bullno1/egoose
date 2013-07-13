@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="base">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <path id="GoosePort.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="libs/commons-codec-1.4.jar"/>
+        <pathelement location="libs/commons-io-2.0.1.jar"/>
+        <pathelement location="libs/commons-lang-2.6.jar"/>
+        <pathelement location="libs/commons-logging-1.1.1.jar"/>
+        <pathelement location="libs/goose-2.1.22-sources.jar"/>
+        <pathelement location="libs/goose-2.1.22.jar"/>
+        <pathelement location="libs/httpclient-4.1.2.jar"/>
+        <pathelement location="libs/httpcore-4.1.2.jar"/>
+        <pathelement location="libs/OtpErlang-1.5.8.jar"/>
+        <pathelement location="libs/jsoup-1.5.2.jar"/>
+        <pathelement location="libs/junit-4.8.1.jar"/>
+        <pathelement location="libs/log4j-1.2.16.jar"/>
+        <pathelement location="libs/scala-compiler-2.9.0-1.jar"/>
+        <pathelement location="libs/scala-library-2.9.0-1.jar"/>
+        <pathelement location="libs/slf4j-api-1.6.1.jar"/>
+        <pathelement location="libs/slf4j-log4j12-1.6.1.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="GoosePort.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target name="GoosePort">
+        <java classname="com.massmify.GoosePort" failonerror="true" fork="yes">
+            <classpath refid="GoosePort.classpath"/>
+        </java>
+    </target>
+</project>

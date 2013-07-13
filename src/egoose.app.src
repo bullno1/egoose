@@ -1,0 +1,11 @@
+{application, egoose, [
+	{description, "Goose binding for Erlang"},
+	{vsn, "1"},
+	{registered, []},
+	{applications, [
+		kernel,
+		stdlib,
+		msgpack
+	]},
+	{env, []}
+]}.
