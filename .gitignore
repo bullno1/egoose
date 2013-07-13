@@ -6,3 +6,4 @@ log
 *.class
 *.jar
 .deps_plt
+!port/libs/OtpErlang-1.5.8.jar

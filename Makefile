@@ -65,7 +65,7 @@ compile-port: goose
 	$(MAKE) -C port
 
 goose:
-	[ -f deps/goose/pom.f ] \
+	[ -f deps/goose/pom.xml ] \
 		|| (mkdir -p deps/goose \
 		    && git clone git://github.com/GravityLabs/goose.git deps/goose)
 
